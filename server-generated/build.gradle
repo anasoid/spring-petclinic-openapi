@@ -1,5 +1,5 @@
 plugins {
-  id 'com.diffplug.gradle.spotless'
+  id 'com.diffplug.spotless'
   id 'org.openapi.generator'
   id 'java'
 }
@@ -43,7 +43,7 @@ sourceSets {
 
 spotless {
   groovyGradle {
-    paddedCell() // Avoid cyclic ambiguities
+    //paddedCell() // Avoid cyclic ambiguities
     greclipse().configFile("$rootDir/config/eclipse-java-google-style.xml")
   }
 }
