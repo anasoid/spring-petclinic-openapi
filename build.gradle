@@ -1,10 +1,9 @@
 plugins {
   id 'checkstyle'
   id 'com.diffplug.spotless' version '6.23.3'
-  id 'org.openapi.generator' version '4.2.3'
-  id 'org.springframework.boot' version '2.7.18'
+  id 'org.openapi.generator' version '7.2.0'
+  id 'org.springframework.boot' version '3.2.1'
   id 'io.spring.dependency-management' version '1.1.4'
-  id 'java'
   id 'jacoco'
   id 'com.google.cloud.tools.jib' version '1.4.0'
   id 'nebula.lint' version '19.0.1'
@@ -13,6 +12,12 @@ plugins {
 
 if (!hasProperty('skipErrorProne')) {
   apply plugin: 'net.ltgt.errorprone'
+}
+
+allprojects {
+  apply plugin: 'java'
+  sourceCompatibility =17
+  targetCompatibility = 17
 }
 
 allprojects {
@@ -40,6 +45,8 @@ group = 'org.springframework.samples'
 version = '1.0.0-SNAPSHOT'
 
 
+
+
 configurations {
   checkstyleConfig
   developmentOnly
@@ -59,6 +66,7 @@ ext {
 }
 
 dependencies {
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
   // Spring and Spring Boot dependencies
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
   implementation 'org.springframework.boot:spring-boot-starter-cache'
@@ -88,8 +96,7 @@ dependencies {
   implementation "org.mapstruct:mapstruct:${mapstructVersion}"
   annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
-  implementation 'com.atlassian.oai:swagger-request-validator-springmvc:2.5.0'
-
+  implementation 'com.atlassian.oai:swagger-request-validator-spring-webmvc:2.39.0'
   compileOnly "org.jetbrains:annotations:${jetbrainsAnnotationsVersion}"
   testImplementation "org.jetbrains:annotations:${jetbrainsAnnotationsVersion}"
   compileOnly 'com.google.code.findbugs:jsr305:3.0.2'

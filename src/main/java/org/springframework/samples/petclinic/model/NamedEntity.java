@@ -16,9 +16,9 @@
 
 package org.springframework.samples.petclinic.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.lang.Nullable;

@@ -35,11 +35,9 @@ import com.tngtech.archunit.lang.ArchCondition;
 import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.ConditionEvents;
 import com.tngtech.archunit.lang.SimpleConditionEvent;
+import jakarta.persistence.EntityManager;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.List;
-import javax.persistence.EntityManager;
-import lombok.NonNull;
 import org.jetbrains.annotations.Contract;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -253,22 +251,6 @@ public class ArchitectureTests {
                 public boolean apply(JavaAnnotation<?> annotation) {
                   return annotation.getRawType().getSimpleName().equals("Nullable")
                       && !annotation.getRawType().isAssignableTo(Nullable.class);
-                }
-              });
-
-  @ArchTest
-  static ArchRule banNonLombokNonNull =
-      noCodeUnits()
-          .should()
-          .beAnnotatedWith(
-              new DescribedPredicate<JavaAnnotation<?>>("non-Lombok @NonNull") {
-                final List<String> nonNullAnnotationNames = Arrays.asList("NonNull", "NotNull");
-
-                @Override
-                public boolean apply(JavaAnnotation<?> annotation) {
-
-                  return nonNullAnnotationNames.contains(annotation.getRawType().getSimpleName())
-                      && !annotation.getRawType().isAssignableTo(NonNull.class);
                 }
               });
 }

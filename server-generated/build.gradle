@@ -1,18 +1,18 @@
 plugins {
   id 'com.diffplug.spotless'
   id 'org.openapi.generator'
-  id 'java'
 }
 
+
 dependencies {
-  implementation platform('org.springframework.boot:spring-boot-dependencies:2.1.7.RELEASE')
+  implementation platform('org.springframework.boot:spring-boot-dependencies:3.2.1')
 
   implementation 'org.apache.tomcat.embed:tomcat-embed-core'
   implementation 'org.springframework:spring-webmvc'
 
-  compileOnly 'io.springfox:springfox-swagger2:2.9.2'
 
-  implementation 'org.openapitools:jackson-databind-nullable:0.1.0'
+  compileOnly 'org.springdoc:springdoc-openapi-ui:1.6.14'
+  implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
 }
 
 openApiGenerate {
@@ -31,7 +31,9 @@ openApiGenerate {
     java8                  : 'true',
     hideGenerationTimestamp: 'true',
     useTags                : 'true',
-    useBeanValidation      : 'false'
+    useBeanValidation      : 'false',
+    useSpringBoot3         : 'true',
+    interfaceOnly          : 'true'
   ]
 }
 

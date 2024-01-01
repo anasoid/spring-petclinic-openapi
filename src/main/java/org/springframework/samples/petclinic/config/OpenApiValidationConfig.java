@@ -4,12 +4,12 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.atlassian.oai.validator.springmvc.OpenApiValidationFilter;
 import com.atlassian.oai.validator.springmvc.OpenApiValidationInterceptor;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -54,8 +54,7 @@ public class OpenApiValidationConfig implements WebMvcConfigurer {
               HttpServletRequest servletRequest,
               HttpServletResponse servletResponse,
               Object handler,
-              ModelAndView modelAndView)
-              throws Exception {
+              ModelAndView modelAndView) {
             if (HttpMethod.OPTIONS.matches(servletRequest.getMethod())) {
               log.debug("Skipping OpenAPI request validation for OPTIONS request");
               return;
